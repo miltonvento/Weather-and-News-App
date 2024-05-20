@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
 import SearchIcon from '@mui/icons-material/Search';
-import MailIcon from '@mui/icons-material/Mail';
+import CloudIcon from '@mui/icons-material/Cloud';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 
 
@@ -52,7 +52,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function PrimarySearchAppBar({handleOnclick, isWeather}) {
+
+  const handleClick = () => {
+    handleOnclick()
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -72,7 +76,7 @@ export default function PrimarySearchAppBar() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            WEATHER
+            
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -85,10 +89,10 @@ export default function PrimarySearchAppBar() {
           </Search>
           
           <Box sx={{ flexGrow: 1 }} />
-          <h3>News</h3>
+          
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                <NewspaperIcon/>
+            <IconButton onClick={() => handleClick()} size="large" aria-label="show 4 new mails" color="inherit">
+                <h3 style={{ display: 'inline-block', marginRight: '10px' }} >{isWeather? "News" : "Weather"}</h3> {isWeather ? < NewspaperIcon/>: <CloudIcon/>}
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

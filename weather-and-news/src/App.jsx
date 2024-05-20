@@ -1,9 +1,11 @@
 import './App.css'
 import PrimarySearchAppBar from './components/AppBar'
 import { useEffect, useState } from 'react'
+import News from './News'
 
 export default function App() {
   const APIKEY = "7d046389c5da3d69d8f7b0fdd4e99060"
+  const NYTKEY = "mxKP0kwVp2M9WjWDTxxHYL2KARmlrtG0"
   const [toggleWeather, setToggleWeather] = useState(true)
   const [location, setLocation] = useState('')
 
@@ -90,17 +92,36 @@ export default function App() {
     // const hourlyTimeList = [timeFrom, timeTo]
     // setHourlyTime(hourlyTimeList)
     // setHourlyWeatherIconID(HourlyData.forecast.symbol.var)
-
     }
     // fetchData()
   }, [])
+
+  // NEWS
+  const [newsData, setNewsData] = useState([])
+
+  // Retrieve news data
+  useEffect(() => {
+    
+    const fetchData = async () => {
+    const data = await fetch(`https://api.nytimes.com/svc/topstories/v2/home.json?api-key=${NYTKEY}`)
+    const articles = await data.json()
+    
+    setNewsData(articles.results)
+  }
+    fetchData()
+  }, [])
+
+
+  const handleOnclick = () => {
+    setToggleWeather(!toggleWeather)
+  }
 
   return (
     <>
     <div className='main-container'>
       <h1> Weather and News Dashboard</h1>
       <div className='secondary-container'>
-          <div className='appbar'><PrimarySearchAppBar/></div>
+          <div className='appbar'><PrimarySearchAppBar handleOnclick={handleOnclick} isWeather={toggleWeather}/></div>
           
           {toggleWeather && <div className='weather'>
             <div className="container text-center">
@@ -177,23 +198,15 @@ export default function App() {
                </div>
             </div>
           </div>}
-
-          {!toggleWeather &&  <div className='news'>
-            <h1 className='news-heading'> Top Stories</h1>
-            <div className='row'>
-              <div className='col-3'> [Image]</div>
-              <div className='col'> 
-              <h2 className='news-headline'> How many ways can lead to freedom? Figured out</h2>
-              <h3 className='news-description'> </h3>
-              </div>
-
-            </div>
-          </div>}
+          
+          {!toggleWeather && <h1 className='news-heading'> Top Stories</h1> && newsData.map((article, index) => {
+            return <News key={index} data={article}/>
+          })}
           
       </div>
    
     </div>
-    <a target="_blank" href="https://icons8.com/icon/1414/temperature"></a>Icons from <a target="_blank" href="https://icons8.com">Icons8</a>
+    {/* <a target="_blank" href="https://icons8.com/icon/1414/temperature"></a>Icons from <a target="_blank" href="https://icons8.com">Icons8</a> */}
     </>
   )
 
