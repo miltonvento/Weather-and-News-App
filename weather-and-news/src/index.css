@@ -1,0 +1,87 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  content: "";
+  position: fixed;
+  background-image: url('/src/assets/landscape.png');
+  background-size: cover;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 100vh;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.secondary-container {
+  display: flex;
+  flex-direction: column;
+  border: 2px;
+  border-radius: 2%;
+  width: 70vw;
+  height: 80vh;
+  background-color: rgb(123, 133, 215);
+  opacity: 0.5;
+}
+
+.appbar {
+  margin-bottom: 40px;
+}
+
+.weather {
+  color: white;
+}
+
+.col h1 {
+  text-align: left;
+  margin-left: 10px;
+  font-size: 4em; /* Adjust the size as needed */
+}
+
+.col {
+  border: solid;
+  border-width: 1px;
+}
+
+.coordinates, .min-max-temp{
+  display: flex;
+  gap: 20px;
+}
+
+.current-tomorrow {
+  margin-bottom: 40px;
+}
+
+.tomorrow-heading {
+  text-align: left;
+  font-size: 2em;
+}
+
+.forecast-row {
+  text-align: left;
+  font-size: 1em;
+}
+
+.tomorrow {
+  margin-left: 10px;
+}
+
+.weekly-forecast {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageContainer {
+  margin-bottom: -15px;
+}
+
+/* NEWS */
+.news {
+  color: white;
+}
